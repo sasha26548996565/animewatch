@@ -11,7 +11,9 @@
     <div class="wrapper">
         @include('includes.header')
 
-        @yield('content')
+        <div class="container">
+            @yield('content')
+        </div>
     </div>
 </body>
 </html>
