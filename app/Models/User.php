@@ -1,9 +1,12 @@
 <?php
 
+declare(srtict_types=1);
+
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -20,4 +23,9 @@ class User extends Authenticatable
     public const ROLE_USER = 'user';
     public const ROLE_ADMIN = 'admin';
     public const PERMISSION_ADD_MATERIAL = 'add-material';
+
+    public function comments(): Relation
+    {
+        return $this->hasMany(Comment::class, 'user_id', 'id');
+    }
 }

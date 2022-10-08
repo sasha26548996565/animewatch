@@ -10,4 +10,32 @@
                 class="bs-card-video"></video>
         </div>
     </div>
+
+    <h4>Comments</h4>
+
+    @auth
+        <form action="{{ route('comment.store', $material->id) }}" method="POST">
+            @csrf
+
+            <div class="form-group">
+                <input type="text" name="text" class="form-control" required placeholder="text" value="{{ old('text') }}">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Добавить комментарий">
+            </div>
+        </form>
+    @else
+        <span class="alert alert-danger">Зарегкстрируйтесь чтобы оставить комментарий
+            <a href="{{ route('register') }}">Зарегестрироваться</a> |
+            <a href="{{ route('login') }}">Войти</a>
+        </span>
+    @endauth
+
+    @foreach ($material->comments as $comment)
+        <p>{{ $comment->user->email }}</p>
+        <p>{{ $comment->text }}</p>
+        <hr>
+    @endforeach
 @endsection
