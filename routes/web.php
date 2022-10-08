@@ -8,8 +8,10 @@ Route::namespace('App\Http\Controllers')->group(function () {
         Route::get('/', 'IndexController')->name('index');
 
         Route::controller('MaterialController')->name('material.')->prefix('material')->group(function () {
-            Route::get('/create', 'create')->name('create');
-            Route::post('/store', 'store')->name('store');
+            Route::middleware('permission:add-material')->group(function () {
+                Route::get('/create', 'create')->name('create');
+                Route::post('/store', 'store')->name('store');
+            });
         });
     });
 });
