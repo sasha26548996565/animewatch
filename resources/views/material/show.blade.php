@@ -36,6 +36,14 @@
     @foreach ($material->comments as $comment)
         <p>{{ $comment->user->email }}</p>
         <p>{{ $comment->text }}</p>
+        @if ($comment->user->id == auth()->user()->id || auth()->user()->isAdmin())
+            <form action="{{ route('comment.destroy', [$material->id, $comment->id]) }}" method="POST">
+                @csrf
+                @method('DELETE')
+
+                <input type="submit" class="btn btn-danger" value="Удалить комментарий">
+            </form>
+        @endif
         <hr>
     @endforeach
 @endsection

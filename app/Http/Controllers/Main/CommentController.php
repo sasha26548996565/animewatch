@@ -18,4 +18,10 @@ class CommentController extends Controller
         Comment::create(array_merge($request->validated(), ['user_id' => Auth::user()->id, 'material_id' => $material->id]));
         return to_route('material.show', $material->slug);
     }
+
+    public function destroy(Material $material, Comment $comment): RedirectResponse
+    {
+        $comment->delete();
+        return to_route('material.show', $material->slug);
+    }
 }

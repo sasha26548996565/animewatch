@@ -16,8 +16,9 @@ Route::namespace('App\Http\Controllers')->group(function () {
             });
         });
 
-        Route::controller('CommentController')->name('comment.')->prefix('comment')->group(function () {
-            Route::post('/store/{material}', 'store')->name('store');
+        Route::controller('CommentController')->name('comment.')->prefix('comment/{material}')->group(function () {
+            Route::post('/store/', 'store')->name('store');
+            Route::delete('/delete/{comment}', 'destroy')->name('destroy');
         });
     });
 });
