@@ -25,7 +25,7 @@ class MaterialController extends Controller
     public function show(string $slug): View
     {
         $material = Material::where('slug', $slug)->first();
-        return view('material.show');
+        return view('material.show', compact('material'));
     }
 
     public function create(): View
