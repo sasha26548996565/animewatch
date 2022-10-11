@@ -11,5 +11,6 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer('includes.header', CategoryComposer::class);
+        View::composer('material.create', CategoryComposer::class);
     }
 }

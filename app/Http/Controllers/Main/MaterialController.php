@@ -30,8 +30,7 @@ class MaterialController extends Controller
 
     public function create(): View
     {
-        $categories = Category::latest()->get();
-        return view('material.create', compact('categories'));
+        return view('material.create');
     }
 
     public function store(MaterialRequest $request): RedirectResponse

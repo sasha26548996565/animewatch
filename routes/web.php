@@ -20,6 +20,11 @@ Route::namespace('App\Http\Controllers')->group(function () {
             Route::post('/store/', 'store')->name('store');
             Route::delete('/delete/{comment}', 'destroy')->name('destroy');
         });
+
+        Route::controller('CategoryController')->name('category.')->prefix('category')->group(function () {
+            Route::get('/{slug}', 'show')->name('show');
+            Route::delete('/{category}', 'destroy')->name('destroy');
+        });
     });
 });
 
