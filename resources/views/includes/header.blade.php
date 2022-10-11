@@ -10,29 +10,42 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('index') }}">Главная</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('material.create') }}">Создать материал</a>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown
+                        Категории
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        @foreach ($categories as $category)
+                            <li>
+                                <a class="dropdown-item" href="#">{{ $category->name }}</a>
+                            </li>
+                        @endforeach
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
+                @auth
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+
+                        <input type="submit" class="btn btn-link" value="logout">
+                    </form>
+                    @can('add-material')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('material.create') }}">Создать материал</a>
+                        </li>
+                    @endcan
+                @endauth
+                @guest
+                    <li class="nav-item">
+                        <a href="{{ route('register') }}" class="nav-link">sign up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('login') }}" class="nav-link">login</a>
+                    </li>
+                @endguest
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex" action="{{ route('search') }}" method="GET">
+                <input class="form-control me-2" type="search" value="{{ $_GET['search'] ?? '' }}" name="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>

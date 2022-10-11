@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Main\MaterialRequest;
+use App\Models\Material;
 use App\Services\MaterialService;
 
 class MaterialController extends Controller
@@ -19,6 +20,12 @@ class MaterialController extends Controller
     public function __construct(MaterialService $materialService)
     {
         $this->materialService = $materialService;
+    }
+
+    public function show(string $slug): View
+    {
+        $material = Material::where('slug', $slug)->first();
+        return view('material.show', compact('material'));
     }
 
     public function create(): View
