@@ -5,12 +5,14 @@
 @section('content')
     <div class="d-flex justify-content-between">
         <h2>Категория {{ $category->name }}</h2>
-        <form action="{{ route('category.destroy', $category->id) }}" method="POST">
-            @csrf
-            @method('DELETE')
+        @role('admin')
+            <form action="{{ route('category.destroy', $category->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
 
-            <input type="submit" class="btn btn-danger" value="Удалить категорию">
-        </form>
+                <input type="submit" class="btn btn-danger" value="Удалить категорию">
+            </form>
+        @endrole
     </div>
     @foreach ($materials as $material)
         <div class="card">
