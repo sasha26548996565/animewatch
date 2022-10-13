@@ -14,6 +14,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
                 Route::get('/create', 'create')->name('create');
                 Route::post('/store', 'store')->name('store');
             });
+            Route::delete('/delete/{material}', 'destroy')->middleware('role:admin')->name('destroy');
         });
 
         Route::controller('CommentController')->name('comment.')->prefix('comment/{material}')->group(function () {

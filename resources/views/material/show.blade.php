@@ -1,6 +1,16 @@
 @extends('layouts.master')
 
 @section('content')
+    @if (auth()->user()->id == $material->user_id || auth()->user()->hasRole('admin'))
+        <form action="{{ route('material.destroy', $material->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+
+            <input type="submit" class="btn btn-danger" value="Удалить материал">
+        </form>
+        <br>
+    @endif
+
     <div class="card">
         <div class="card-header">
             <h5 class="card-title">{{ $material->name }}</h5>

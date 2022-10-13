@@ -38,4 +38,10 @@ class MaterialController extends Controller
         $this->materialService->store(new MaterialDTO($request->validated()));
         return to_route('index');
     }
+
+    public function destroy(Material $material): RedirectResponse
+    {
+        $material->delete();
+        return to_route('index');
+    }
 }
