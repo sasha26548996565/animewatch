@@ -12,7 +12,13 @@
 
                 <input type="submit" class="btn btn-danger" value="Удалить категорию">
             </form>
+            <br>
         @endrole
+
+        <form action="{{ route('category.toggleSubscription', $category->id) }}" method="POST">
+            @csrf
+            <input type="submit" class="btn btn-success" value="{{ auth()->user()->hasSubscribed($category) ? 'отписаться' : 'подписаться' }}">
+        </form>
     </div>
     @foreach ($materials as $material)
         <div class="card">

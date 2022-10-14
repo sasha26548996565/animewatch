@@ -25,6 +25,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
         Route::controller('CategoryController')->name('category.')->prefix('category')->group(function () {
             Route::get('/{slug}', 'show')->name('show');
             Route::delete('/{category}', 'destroy')->name('destroy');
+            Route::post('/toggle-subscription/{category}', 'toggleSubscription')->name('toggleSubscription');
         });
     });
 });

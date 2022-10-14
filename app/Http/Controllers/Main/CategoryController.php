@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Main;
 use App\Models\Category;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 
 class CategoryController extends Controller
@@ -23,5 +24,13 @@ class CategoryController extends Controller
     {
         $category->delete();
         return to_route('index');
+    }
+
+    public function toggleSubscription(Category $category): RedirectResponse
+    {
+        $user = Auth::user();
+        $user->toggleSubscribe($category);
+
+        return to_route('category.show', $category->slug);
     }
 }
