@@ -15,6 +15,11 @@ class Material extends Model
 
     protected $guarded = [];
 
+    public function category(): Relation
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
     public function comments(): Relation
     {
         return $this->hasMany(Comment::class, 'material_id', 'id');
